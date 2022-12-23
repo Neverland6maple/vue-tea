@@ -176,7 +176,6 @@ router.post('/api/updateAddress',(req,res,next)=>{
 		let uId = results[0].id;
 		let {id,name,tel,province,city,county,addressDetail,isDefault,areaCode} = req.body;
 
-
 		//查addressId 比较 iddefault有无改变 无改变则修改数据 改变了则 将所有iddefault置0后 修改数据
 		connection.query(`select * from address where uId = ${uId} and id = ${id} and isDefault = ${isDefault}`,(err,result)=>{
 			if(error){
@@ -197,16 +196,17 @@ router.post('/api/updateAddress',(req,res,next)=>{
           })
       	})
 			}else{
-				connection.query(`update address isDefault = replace(isDefault,'1','0') where uId = ${uId} and isDefault = ${1}`,function(e,r){
+				connection.query(`update address set isDefault=${0} where uId = ${uId} and isDefault = ${1}`,function(e,r){
 					connection.query(updateSql,[uId,name,tel,province,city,county,addressDetail,isDefault,areaCode],(errors,datas)=>{
 						if(errors){
 							console.log(errors);
 							return;
 						}
-							res.send({
-								success:true,
-								msg:'修改成功'
-							})
+					console.log(23);
+						res.send({
+							success:true,
+							msg:'修改成功'
+						})
 					})
 			})
 			}
@@ -369,13 +369,11 @@ router.post('/api/addCart',(req,res,next)=>{
 			return;
 		}
 		const uId = result[0].id;
-		// console.log(result[0]);
 		connection.query(`select * from goods_list where id=${goodsId}`,(error2,result2)=>{
 			if(error2){
 				console.log(error2);
 				return;
 			}
-			// console.log(result2[0]);
 			const goodsName = result2[0].name;
 			const goodsPrice = result2[0].price;
 			const goodsImgUrl = result2[0].imgUrl;
@@ -409,6 +407,7 @@ router.post('/api/recovery',(req,res,next)=>{
 				console.log(error);
 				return;
 			}
+			console.log(id,pwd,req.body.pwd);
 			res.send({
 				success:true,
 				msg:'修改成功',
@@ -483,7 +482,7 @@ router.post('/api/addUser',(req,res,next)=>{
 			const secret = 'acfun'
 			//生成token
 			const token = jwt.sign(payload,secret,{
-				expiresIn:60
+				expiresIn:600
 			});
 			const id = result[0].id
 			connection.query(`update user set token = '${token}' where id = ${id}`,(err)=>{
@@ -626,7 +625,13 @@ router.get('/api/goods/id',(req,res,next)=>{
 router.get('/api/goods/shopList',function(req,res,next){
 	const [searchName,orderName] = Object.keys(req.query);
 	const [searchVal,orderVal] = Object.values(req.query);
-	connection.query('select * from goods_list where name like "%'+searchVal+'%" order by '+orderName+' '+orderVal+'',function(error,result){
+	let str = '';
+	if(orderName === 'zh'){
+		str = 'select * from goods_list where name like "%'+searchVal+'%" ';
+	}else{
+		str = 'select * from goods_list where name like "%'+searchVal+'%" order by '+orderName+' '+orderVal+''
+	}
+	connection.query(str,function(error,result){
 		res.send({
 			code:0,
 			data:result

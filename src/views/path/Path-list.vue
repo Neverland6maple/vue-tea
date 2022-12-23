@@ -53,6 +53,7 @@ export default{
     })
     const onAdd = async (content)=>{
       content.isDefault = content.isDefault == true ? 1 : 0;
+      console.log(content);
       const {data:res} = await axios({
         method:'post',
         url:'/api/addAddress',

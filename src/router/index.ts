@@ -127,6 +127,7 @@ router.beforeEach((to,from,next)=>{
 
   if(nextRoute.indexOf( to.name as string) >= 0 ){
     if(!userInfo){
+      console.log(1);
       router.push('/login');
       return;
     }

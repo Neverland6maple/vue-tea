@@ -39,6 +39,7 @@
 
         <div class='goods-name'>
           <h1>{{data.data.name}}</h1>
+          <div>{{data.data.content}}</div>
           <div>性价首选，茶感十足、鲜醇耐泡的大众口粮茶</div>
         </div>
         <div class='goods-price'>
@@ -116,6 +117,8 @@ export default{
         }
       })
       data.data = res.data;
+      // console.log(swiperList[0]);
+      swiperList.unshift({imgUrl:res.data.imgUrl});
     }
     getData();
     onActivated(()=>{
@@ -124,6 +127,7 @@ export default{
         id.value = route.query.id;
         getData();
       }else{
+
         return;
       }
       

@@ -98,13 +98,13 @@ export default defineComponent({
 			nextTick(()=>{
 				// @ts-ignore
 				new BetterScroll(left.value, {
-          click:true
-        })
+				click:true
+				})
 				// @ts-ignore
 				rightScroll = new BetterScroll(right.value, {
-          probeType:3,
-					bounce:false
-        })
+								probeType:3,
+											bounce:false
+								})
 
 				rightScroll.on('scroll',(pos:any)=>{
 					scrollY.value = Math.abs(pos.y);

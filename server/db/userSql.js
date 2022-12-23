@@ -13,9 +13,9 @@ const User = {
     const secret = 'acfun'
     //生成token
     const token = jwt.sign(payload,secret,{
-      expiresIn:60
+      expiresIn:600
     });
-    return `insert into user (tel,pwd,imgUrl,nickName,token) values (${'"'+body.tel+'"'},${body.pwd || null},"${'/images/user.jpeg'}",${'"'+body.tel+'"'},${'"'+token+'"'})`
+    return `insert into user (tel,pwd,imgUrl,nickName,token) values (${'"'+body.tel+'"'},${body.pwd || '0'},"${'/images/user.jpeg'}",${'"'+body.tel+'"'},${'"'+token+'"'})`
   }
 }
 module.exports = User;

@@ -26,28 +26,26 @@ export default defineComponent({
     const goBack = ()=>{
       router.back();
     }
-		const goSearchList = ()=>{
-			if(!searchVal.value) return;
-			searchList.splice(0,searchList.length,...JSON.parse(localStorage.getItem('searchList') || '[]'));
-
-			searchList.unshift(searchVal.value);
-			const newArr = new Set(searchList);
-			searchList.splice(0,searchList.length,...Array.from(newArr));
-			localStorage.setItem('searchList',JSON.stringify(searchList));
-			
-			router.push({
-				path:'/search/list',
-				query:{
-					key:searchVal.value
-				}
-				});
-		}
-		return{
-      goBack,
-			goSearchList,
-			searchVal,
-			searchList
-		}
+	const goSearchList = ()=>{
+		if(!searchVal.value) return;
+		searchList.splice(0,searchList.length,...JSON.parse(localStorage.getItem('searchList') || '[]'));
+		searchList.unshift(searchVal.value);
+		const newArr = new Set(searchList);
+		searchList.splice(0,searchList.length,...Array.from(newArr));
+		localStorage.setItem('searchList',JSON.stringify(searchList));
+		router.push({
+			path:'/search/list',
+			query:{
+				key:searchVal.value
+			}
+			});
+	}
+	return{
+      	goBack,
+		goSearchList,
+		searchVal,
+		searchList
+	}
   }
 });
 

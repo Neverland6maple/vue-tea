@@ -52,9 +52,14 @@ export default defineComponent({
     const value = ref('0');
     let items:any =reactive([]); 
     let newData:any = reactive([])
+
     const addData = async (index:string)=>{
       const {data} = await axios.get('/api/index_list/'+index+'/data/1');
-      newData.splice(0,newData.length,...data.data);
+      if(index === '0'){
+        newData.splice(0,newData.length,...data.data.data);
+      }else if(data){
+        newData.splice(0,newData.length,...data.data);
+      }
       console.log(newData);
 
       nextTick(()=>{

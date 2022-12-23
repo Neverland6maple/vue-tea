@@ -48,7 +48,6 @@ export default{
         }
       }
       
-
       router.push({
         path:'/path-list',
         query:{
@@ -56,6 +55,7 @@ export default{
         }
       })
     }
+    
     const getData = async ()=>{
       const {data:res} = await axios({
         method:'post',

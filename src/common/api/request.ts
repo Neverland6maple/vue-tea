@@ -40,7 +40,7 @@ axios.interceptors.request.use((config:AxiosRequestConfig<any>) => {
     }
     if(tokenObj.exp - new Date().getTime() /1000 < 0){
       router.push('/login')
-      Notify('登录已过期')
+      Notify('登录已过期,请用手机号重新登录')
       return;
     }
   }

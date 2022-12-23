@@ -1,12 +1,12 @@
 let path = require("path");
 module.exports = {
-	// publicPath:'./',
+	publicPath:'./',
 	//代理
 	devServer: {
-    host: '192.168.0.106',
+    host: '192.168.0.105',
 	  proxy: {
 	    '/api': {
-	      target: "http://192.168.0.106:3000",
+	      target: "http://192.168.0.105:3000",
 	      changeOrigin: true,
 	      pathRewrite: {
 	        '^/api': '/api'

@@ -65,7 +65,6 @@ export default{
     const route = useRoute();
     const axios:any = inject('axios');
     const getData = ()=>{
-      
       axios.get('/api/goods/shopList',{
         params:{
           searchName:route.query.key,
@@ -75,14 +74,13 @@ export default{
         shopList.splice(0,shopList.length,...res.data.data)    
       }).catch((error: any)=>{
         console.log(error);
-        
       })
     }
     const changeTab = (index:number)=>{
       currentIndex.value = index;
       const item = searchList[index];
       searchList.forEach((item,i)=>{
-        if(index != i && 'status' in item){
+        if(index !== i && 'status' in item){
           item.status = 0;
         }
       })
