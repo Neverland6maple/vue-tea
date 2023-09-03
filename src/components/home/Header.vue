@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>
-      <img src="@/assets/images/logo.png" alt="">
+      <img src="@/assets/images/gdut.png" alt="">
     </h1>
     <div class='search'>
       <i class='iconfont icon-fangdajing'></i>
@@ -44,7 +44,7 @@ header h1{
 	/* height: 1.333333rem; */
 }
 header h1 img{
-	width: 2.5rem;
+	width: 1.8rem;
 	height: 100%;
 }
 .search{
