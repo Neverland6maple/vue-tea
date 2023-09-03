@@ -1,5 +1,7 @@
 # vue-tea
 
+一款基于vue开发的移动端电子商城
+
 ## Project setup
 ```
 npm install
